@@ -47,7 +47,7 @@ const add = (transport) => {
 const update = (transport) => {
     const transportCollection = get();
 
-    const transports = restaurantCollection.transports;
+    const transports = transportCollection.transports;
 
     /* eslint-disable-next-line eqeqeq */ // we really do want == here, not ===
     const index = transports.findIndex((r) => r.id == transport.id);
@@ -65,7 +65,7 @@ const del = (id) => {
         return { "error": "id is a required parameter" };
     }
     const transportCollection = get();
-    const transports = restaurantCollection.transports;
+    const transports = transportCollection.transports;
 
     /* eslint-disable-next-line eqeqeq */ // we really do want == here, not ===
     const index = transports.findIndex((r) => r.id == id);
