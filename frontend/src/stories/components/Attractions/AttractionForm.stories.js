@@ -23,7 +23,7 @@ Default.args = {
 export const Show = Template.bind({});
 
 Show.args = {
-    Restaurant: attractionFixtures.oneAttraction,
+    Attraction: attractionFixtures.oneAttraction,
     submitText: "",
     submitAction: () => { }
 };
