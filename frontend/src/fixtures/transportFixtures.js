@@ -5,7 +5,7 @@ const transportFixtures = {
         "id": 1,
         "name": "Standard Kart",
         "mode": "kart",
-        "cost": 100,  
+        "cost": "100",  
       }
     ],
 
@@ -15,21 +15,21 @@ const transportFixtures = {
             "id": 2,
             "name": "Biddybuggy",
             "mode": "kart",
-            "cost": 1000,
+            "cost": "1000",
         },
 
         {
             "id": 3,
             "name": "Inkstriker",
             "mode": "kart",
-            "cost": 10000, 
+            "cost": "10000", 
         },
 
         {
             "id": 4,
             "name": "Mr. Scooty",
             "mode": "scooter",
-            "cost": 100000,     
+            "cost": "100000",     
         },
         
     ]
