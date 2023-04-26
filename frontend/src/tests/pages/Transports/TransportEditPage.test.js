@@ -111,7 +111,7 @@ describe("TransportEditPage tests", () => {
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage =  `updatedTransport: {"transport":{"id":3,"name":"Mr. Scooty","mode":"scooter","cost":"100000"}`
+        const expectedMessage =  `updatedTransport: {"transport":{"id":3,"name":"Mr. Scooty","mode":"scooter","cost":"100000"}}`
 
         expect(message).toMatch(expectedMessage);
         restoreConsole();
