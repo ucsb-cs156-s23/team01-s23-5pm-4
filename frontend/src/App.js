@@ -11,7 +11,7 @@ import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantDetailsPage from "main/pages/Restaurants/RestaurantDetailsPage";
 
 
-// import TransportCreatePage from "main/pages/Transports/TransportCreatePage";
+import TransportCreatePage from "main/pages/Transports/TransportCreatePage";
 import TransportEditPage from "main/pages/Transports/TransportEditPage";
 import TransportIndexPage from "main/pages/Transports/TransportIndexPage";
 import TransportDetailsPage from "main/pages/Transports/TransportDetailsPage";
@@ -22,6 +22,11 @@ import AttractionCreatePage from "main/pages/Attractions/AttractionCreatePage";
 import AttractionEditPage from "main/pages/Attractions/AttractionEditPage";
 import AttractionIndexPage from "main/pages/Attractions/AttractionIndexPage";
 import AttractionDetailsPage from "main/pages/Attractions/AttractionDetailsPage";
+
+import BookCreatePage from "main/pages/Books/BookCreatePage";
+import BookEditPage from "main/pages/Books/BookEditPage";
+import BookIndexPage from "main/pages/Books/BookIndexPage";
+import BookDetailsPage from "main/pages/Books/BookDetailsPage";
 
 
 
@@ -44,8 +49,7 @@ function App() {
         <Route exact path="/restaurants/details/:id" element={<RestaurantDetailsPage />} />
         <Route exact path="/restaurants/" element={<RestaurantIndexPage />} />
 
-
-        {/* <Route exact path="/transports/create" element={<TransportCreatePage />} /> */}
+        <Route exact path="/transports/create" element={<TransportCreatePage />} />
         <Route exact path="/transports/edit/:id" element={<TransportEditPage />} />
         <Route exact path="/transports/details/:id" element={<TransportDetailsPage />} />
         <Route exact path="/transports/" element={<TransportIndexPage />} />
@@ -55,7 +59,10 @@ function App() {
         <Route exact path="/attractions/details/:id" element={<AttractionDetailsPage />} />
         <Route exact path="/attractions/" element={<AttractionIndexPage />} />
 
-
+        <Route exact path="/books/create" element={<BookCreatePage />} />
+        <Route exact path="/books/edit/:id" element={<BookEditPage />} />
+        <Route exact path="/books/details/:id" element={<BookDetailsPage />} />
+        <Route exact path="/books/" element={<BookIndexPage />} />
       </Routes>
     </BrowserRouter>
   );
