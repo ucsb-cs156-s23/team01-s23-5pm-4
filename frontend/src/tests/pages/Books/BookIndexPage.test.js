@@ -106,7 +106,7 @@ describe("BookIndexPage tests", () => {
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage = `BookIndexPage deleteCallback: {"id":3,"name":"Parameterized Algorithms","author":"Daniel Lokshtanov"}`;
+        const expectedMessage = `BookIndexPage deleteCallback: {"id":3,"name":"Parameterized Algorithms","author":"Daniel Lokshtanov","genre":"Fantasy","word count":"too many"}`;
         expect(message).toMatch(expectedMessage);
         restoreConsole();
 

@@ -15,8 +15,8 @@ jest.mock('react-router-dom', () => ({
 describe("BookTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Name", "Author"];
-  const expectedFields = ["id", "name", "author"];
+  const expectedHeaders = ["id", "Name", "Author", "Genre", "Word count"];
+  const expectedFields = ["id", "name", "author", "genre", "word count"];
   const testId = "BookTable";
 
   test("showCell function works properly", () => {
@@ -141,7 +141,7 @@ describe("BookTable tests", () => {
     // assert - check that the console.log was called with the expected message
     expect(console.log).toHaveBeenCalled();
     const message = console.log.mock.calls[0][0];
-    const expectedMessage = `editCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan"})`;
+    const expectedMessage = `editCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan","genre":"Nonfiction","word count":"87223"})`;
     expect(message).toMatch(expectedMessage);
     restoreConsole();
   });
@@ -175,7 +175,7 @@ describe("BookTable tests", () => {
     // assert - check that the console.log was called with the expected message
     expect(console.log).toHaveBeenCalled();
     const message = console.log.mock.calls[0][0];
-    const expectedMessage = `detailsCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan"})`;
+    const expectedMessage = `detailsCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan","genre":"Nonfiction","word count":"87223"})`;
     expect(message).toMatch(expectedMessage);
     restoreConsole();
   });
@@ -206,7 +206,7 @@ describe("BookTable tests", () => {
      // assert - check that the console.log was called with the expected message
      await(waitFor(() => expect(console.log).toHaveBeenCalled()));
      const message = console.log.mock.calls[0][0];
-     const expectedMessage = `deleteCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan"})`;
+     const expectedMessage = `deleteCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan","genre":"Nonfiction","word count":"87223"})`;
      expect(message).toMatch(expectedMessage);
      restoreConsole();
   });

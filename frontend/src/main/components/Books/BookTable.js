@@ -42,6 +42,14 @@ export default function BookTable({
         {
             Header: 'Author',
             accessor: 'author',
+        },
+        {
+            Header: 'Genre',
+            accessor: 'genre',
+        },
+        {
+            Header: 'Word count',
+            accessor: 'word count',
         }
     ];
 
