@@ -10,10 +10,19 @@ import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantDetailsPage from "main/pages/Restaurants/RestaurantDetailsPage";
 
+
+// import TransportCreatePage from "main/pages/Transports/TransportCreatePage";
+import TransportEditPage from "main/pages/Transports/TransportEditPage";
+import TransportIndexPage from "main/pages/Transports/TransportIndexPage";
+// import TransportDetailsPage from "main/pages/Transports/TransportDetailsPage";
+
+
+
 import AttractionCreatePage from "main/pages/Attractions/AttractionCreatePage";
 import AttractionEditPage from "main/pages/Attractions/AttractionEditPage";
 import AttractionIndexPage from "main/pages/Attractions/AttractionIndexPage";
 import AttractionDetailsPage from "main/pages/Attractions/AttractionDetailsPage";
+
 
 
 function App() {
@@ -35,10 +44,17 @@ function App() {
         <Route exact path="/restaurants/details/:id" element={<RestaurantDetailsPage />} />
         <Route exact path="/restaurants/" element={<RestaurantIndexPage />} />
 
+
+        {/* <Route exact path="/transports/create" element={<TransportCreatePage />} /> */}
+        <Route exact path="/transports/edit/:id" element={<TransportEditPage />} />
+        {/* <Route exact path="/transports/details/:id" element={<TransportDetailsPage />} /> */}
+        <Route exact path="/transports/" element={<TransportIndexPage />} />
+
         <Route exact path="/attractions/create" element={<AttractionCreatePage />} />
         <Route exact path="/attractions/edit/:id" element={<AttractionEditPage />} />
         <Route exact path="/attractions/details/:id" element={<AttractionDetailsPage />} />
         <Route exact path="/attractions/" element={<AttractionIndexPage />} />
+
 
       </Routes>
     </BrowserRouter>
