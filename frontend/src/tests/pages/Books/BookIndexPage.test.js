@@ -63,11 +63,11 @@ describe("BookIndexPage tests", () => {
         expect(createBookButton).toBeInTheDocument();
         expect(createBookButton).toHaveAttribute("style", "float: right;");
 
-        const name = screen.getByText("Freebirds");
+        const name = screen.getByText("Parameterized Algorithms");
         expect(name).toBeInTheDocument();
 
-        const description = screen.getByText("Burrito joint, and iconic Isla Vista location");
-        expect(description).toBeInTheDocument();
+        const author = screen.getByText("Daniel Lokshtanov");
+        expect(author).toBeInTheDocument();
 
         expect(screen.getByTestId("BookTable-cell-row-0-col-Delete-button")).toBeInTheDocument();
         expect(screen.getByTestId("BookTable-cell-row-0-col-Details-button")).toBeInTheDocument();
@@ -106,7 +106,7 @@ describe("BookIndexPage tests", () => {
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage = `BookIndexPage deleteCallback: {"id":3,"name":"Parameterized Algorithms","author":"Daniel Lokshtanov","genre":"Fantasy","word count":"too many"}`;
+        const expectedMessage = `BookIndexPage deleteCallback: {"id":3,"name":"Parameterized Algorithms","author":"Daniel Lokshtanov"}`;
         expect(message).toMatch(expectedMessage);
         restoreConsole();
 
