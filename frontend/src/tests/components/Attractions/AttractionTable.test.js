@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import TransportTable, { showCell } from "main/components/Transports/TransportTable";
-import { transportFixtures } from "fixtures/transportFixtures";
+import AttractionTable, { showCell } from "main/components/Attractions/AttractionTable";
+import { attractionFixtures } from "fixtures/attractionFixtures";
 import mockConsole from "jest-mock-console";
 
 const mockedNavigate = jest.fn();
@@ -12,12 +12,12 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedNavigate
 }));
 
-describe("TransportTable tests", () => {
+describe("AttractionTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Name", "Mode", "Cost"];
-  const expectedFields = ["id", "name", "mode", "cost"];
-  const testId = "TransportTable";
+  const expectedHeaders = ["id", "Name", "Description"];
+  const expectedFields = ["id", "name", "description"];
+  const testId = "AttractionTable";
 
   test("showCell function works properly", () => {
     const cell = {
@@ -32,7 +32,7 @@ describe("TransportTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <TransportTable transports={[]} />
+          <AttractionTable attractions={[]} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -45,7 +45,7 @@ describe("TransportTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <TransportTable transports={transportFixtures.threeTransports} />
+          <AttractionTable attractions={attractionFixtures.threeAttractions} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -61,10 +61,10 @@ describe("TransportTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Biddybuggy");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Empire State Building");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Inkstriker");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Palace of Fine Arts");
 
     const detailsButton = screen.getByTestId(`${testId}-cell-row-0-col-Details-button`);
     expect(detailsButton).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe("TransportTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <TransportTable transports={transportFixtures.threeTransports} showButtons={false} />
+          <AttractionTable attractions={attractionFixtures.threeAttractions} showButtons={false} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -101,10 +101,10 @@ describe("TransportTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Biddybuggy");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Empire State Building");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Inkstriker");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Palace of Fine Arts");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -120,14 +120,14 @@ describe("TransportTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <TransportTable transports={transportFixtures.threeTransports} />
+          <AttractionTable attractions={attractionFixtures.threeAttractions} />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Biddybuggy");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Empire State Building");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -136,12 +136,12 @@ describe("TransportTable tests", () => {
     fireEvent.click(editButton);
 
     // assert - check that the navigate function was called with the expected path
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/transports/edit/2'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/attractions/edit/2'));
 
     // assert - check that the console.log was called with the expected message
     expect(console.log).toHaveBeenCalled();
     const message = console.log.mock.calls[0][0];
-    const expectedMessage = `editCallback: {"id":2,"name":"Biddybuggy","mode":"kart","cost":"1000"})`;
+    const expectedMessage = `editCallback: {"id":2,"name":"Empire State Building","description":"102-story Art Deco skyscraper in Midtown Manhattan"})`;
     expect(message).toMatch(expectedMessage);
     restoreConsole();
   });
@@ -154,14 +154,14 @@ describe("TransportTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <TransportTable transports={transportFixtures.threeTransports} />
+          <AttractionTable attractions={attractionFixtures.threeAttractions} />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Biddybuggy");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Empire State Building");
 
     const detailsButton = screen.getByTestId(`${testId}-cell-row-0-col-Details-button`);
     expect(detailsButton).toBeInTheDocument();
@@ -170,12 +170,12 @@ describe("TransportTable tests", () => {
     fireEvent.click(detailsButton);
 
     // assert - check that the navigate function was called with the expected path
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/transports/details/2'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/attractions/details/2'));
 
     // assert - check that the console.log was called with the expected message
     expect(console.log).toHaveBeenCalled();
     const message = console.log.mock.calls[0][0];
-    const expectedMessage = `detailsCallback: {"id":2,"name":"Biddybuggy","mode":"kart","cost":"1000"})`;
+    const expectedMessage = `detailsCallback: {"id":2,"name":"Empire State Building","description":"102-story Art Deco skyscraper in Midtown Manhattan"})`;
     expect(message).toMatch(expectedMessage);
     restoreConsole();
   });
@@ -188,14 +188,14 @@ describe("TransportTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <TransportTable transports={transportFixtures.threeTransports} />
+          <AttractionTable attractions={attractionFixtures.threeAttractions} />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Biddybuggy");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Empire State Building");
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
@@ -206,7 +206,7 @@ describe("TransportTable tests", () => {
      // assert - check that the console.log was called with the expected message
      await(waitFor(() => expect(console.log).toHaveBeenCalled()));
      const message = console.log.mock.calls[0][0];
-     const expectedMessage = `deleteCallback: {"id":2,"name":"Biddybuggy","mode":"kart","cost":"1000"})`;
+     const expectedMessage = `deleteCallback: {"id":2,"name":"Empire State Building","description":"102-story Art Deco skyscraper in Midtown Manhattan"})`;
      expect(message).toMatch(expectedMessage);
      restoreConsole();
   });
