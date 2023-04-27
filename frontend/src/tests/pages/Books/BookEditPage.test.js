@@ -1,5 +1,5 @@
 import { render, screen, act, waitFor, fireEvent } from "@testing-library/react";
-import TransportEditPage from "main/pages/Transports/TransportEditPage";
+import BookEditPage from "main/pages/Books/BookEditPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import mockConsole from "jest-mock-console";
@@ -15,18 +15,19 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const mockUpdate = jest.fn();
-jest.mock('main/utils/transportUtils', () => {
+jest.mock('main/utils/bookUtils', () => {
     return {
         __esModule: true,
-        transportUtils: {
-            update: (_transport) => {return mockUpdate();},
+        bookUtils: {
+            update: (_book) => {return mockUpdate();},
             getById: (_id) => {
                 return {
-                    transport: {
+                    book: {
                         id: 3,
-                        name: "Inkstriker",
-                        mode: "kart",
-                        cost: "10000"
+                         name: "Parameterized Algorithms",
+                         author: "Daniel Lokshtanov"
+                        //  genre: "Fantasy",
+                        //  wordcount: "too many",     
                     }
                 }
             }
@@ -35,7 +36,7 @@ jest.mock('main/utils/transportUtils', () => {
 });
 
 
-describe("TransportEditPage tests", () => {
+describe("BookEditPage tests", () => {
 
     const queryClient = new QueryClient();
 
@@ -43,7 +44,7 @@ describe("TransportEditPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <TransportEditPage />
+                    <BookEditPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -54,34 +55,32 @@ describe("TransportEditPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <TransportEditPage />
+                    <BookEditPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        expect(screen.getByTestId("TransportForm-name")).toBeInTheDocument();
-        expect(screen.getByDisplayValue('Inkstriker')).toBeInTheDocument();
-        expect(screen.getByDisplayValue('kart')).toBeInTheDocument();
-        expect(screen.getByDisplayValue('10000')).toBeInTheDocument();
+        expect(screen.getByTestId("BookForm-name")).toBeInTheDocument();
+        expect(screen.getByDisplayValue('Parameterized Algorithms')).toBeInTheDocument();
+        expect(screen.getByDisplayValue('Daniel Lokshtanov')).toBeInTheDocument();
     });
 
-    test("redirects to /transports on submit", async () => {
+    test("redirects to /books on submit", async () => {
 
         const restoreConsole = mockConsole();
 
         mockUpdate.mockReturnValue({
-            "transport": {
+            "book": {
                 id: 3,
-                name: "Mr. Scooty",
-                mode: "scooter",
-                cost: "100000"
+                name: "Parameterized Algorithms",
+                author: "Daniel Lokshtanov"
             }
         });
 
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <TransportEditPage />
+                    <BookEditPage />
                 </MemoryRouter>
             </QueryClientProvider>
         )
@@ -89,29 +88,26 @@ describe("TransportEditPage tests", () => {
         const nameInput = screen.getByLabelText("Name");
         expect(nameInput).toBeInTheDocument();
 
-        const modeInput = screen.getByLabelText("Mode");
-        expect(modeInput).toBeInTheDocument();
 
-        const costInput = screen.getByLabelText("Cost");
-        expect(costInput).toBeInTheDocument();
+        const authorInput = screen.getByLabelText("Author");
+        expect(authorInput).toBeInTheDocument();
 
         const updateButton = screen.getByText("Update");
         expect(updateButton).toBeInTheDocument();
 
         await act(async () => {
-            fireEvent.change(nameInput, { target: { value: 'Mr. Scooty' } })
-            fireEvent.change(modeInput, { target: { value: 'scooter' } })
-            fireEvent.change(costInput, { target: { value: '100000' } })
+            fireEvent.change(nameInput, { target: { value: 'Parameterized Algorithms' } })
+            fireEvent.change(authorInput, { target: { value: 'Daniel Lokshtanov' } })
             fireEvent.click(updateButton);
         });
 
         await waitFor(() => expect(mockUpdate).toHaveBeenCalled());
-        await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("/transports"));
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("/books"));
 
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage =  `updatedTransport: {"transport":{"id":3,"name":"Mr. Scooty","mode":"scooter","cost":"100000"}}`
+        const expectedMessage =  `updatedBook: {"book":{"id":3,"name":"Parameterized Algorithms","author":"Daniel Lokshtanov"}`
 
         expect(message).toMatch(expectedMessage);
         restoreConsole();
