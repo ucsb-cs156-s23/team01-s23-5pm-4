@@ -40,8 +40,8 @@ export default function BookTable({
             accessor: 'name',
         },
         {
-            Header: 'Description',
-            accessor: 'description',
+            Header: 'Author',
+            accessor: 'author',
         }
     ];
 

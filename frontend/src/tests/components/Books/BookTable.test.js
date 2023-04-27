@@ -15,8 +15,8 @@ jest.mock('react-router-dom', () => ({
 describe("BookTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Name", "Description"];
-  const expectedFields = ["id", "name", "description"];
+  const expectedHeaders = ["id", "Name", "Author"];
+  const expectedFields = ["id", "name", "author"];
   const testId = "BookTable";
 
   test("showCell function works properly", () => {
@@ -61,10 +61,10 @@ describe("BookTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Percy Jackson and the Lightning Thief");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Freebirds");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Parameterized Algorithms");
 
     const detailsButton = screen.getByTestId(`${testId}-cell-row-0-col-Details-button`);
     expect(detailsButton).toBeInTheDocument();
@@ -101,10 +101,10 @@ describe("BookTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Percy Jackson and the Lightning Thief");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Freebirds");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Parameterized Algorithms");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -127,7 +127,7 @@ describe("BookTable tests", () => {
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Percy Jackson and the Lightning Thief");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -141,7 +141,7 @@ describe("BookTable tests", () => {
     // assert - check that the console.log was called with the expected message
     expect(console.log).toHaveBeenCalled();
     const message = console.log.mock.calls[0][0];
-    const expectedMessage = `editCallback: {"id":2,"name":"Cristino's Bakery","description":"This place is takeout only.  It may look mostly like a bakery with Mexican pastries, but it also has amazing burritos and tacos"})`;
+    const expectedMessage = `editCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan"})`;
     expect(message).toMatch(expectedMessage);
     restoreConsole();
   });
@@ -161,7 +161,7 @@ describe("BookTable tests", () => {
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Percy Jackson and the Lightning Thief");
 
     const detailsButton = screen.getByTestId(`${testId}-cell-row-0-col-Details-button`);
     expect(detailsButton).toBeInTheDocument();
@@ -175,7 +175,7 @@ describe("BookTable tests", () => {
     // assert - check that the console.log was called with the expected message
     expect(console.log).toHaveBeenCalled();
     const message = console.log.mock.calls[0][0];
-    const expectedMessage = `detailsCallback: {"id":2,"name":"Cristino's Bakery","description":"This place is takeout only.  It may look mostly like a bakery with Mexican pastries, but it also has amazing burritos and tacos"})`;
+    const expectedMessage = `detailsCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan"})`;
     expect(message).toMatch(expectedMessage);
     restoreConsole();
   });
@@ -195,7 +195,7 @@ describe("BookTable tests", () => {
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Percy Jackson and the Lightning Thief");
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
@@ -206,7 +206,7 @@ describe("BookTable tests", () => {
      // assert - check that the console.log was called with the expected message
      await(waitFor(() => expect(console.log).toHaveBeenCalled()));
      const message = console.log.mock.calls[0][0];
-     const expectedMessage = `deleteCallback: {"id":2,"name":"Cristino's Bakery","description":"This place is takeout only.  It may look mostly like a bakery with Mexican pastries, but it also has amazing burritos and tacos"})`;
+     const expectedMessage = `deleteCallback: {"id":2,"name":"Percy Jackson and the Lightning Thief","author":"Rick Riordan"})`;
      expect(message).toMatch(expectedMessage);
      restoreConsole();
   });
