@@ -10,10 +10,10 @@ import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantDetailsPage from "main/pages/Restaurants/RestaurantDetailsPage";
 
-import AttractionCreatePage from "main/pages/AttractionCreatePage";
-import AttractionEditPage from "main/pages/AttractionEditPage";
-import AttractionIndexPage from "main/pages/AttractionIndexPage";
-import AttractionDetailsPage from "main/pages/AttractionDetailsPage";
+import AttractionCreatePage from "main/pages/Attractions/AttractionCreatePage";
+import AttractionEditPage from "main/pages/Attractions/AttractionEditPage";
+import AttractionIndexPage from "main/pages/Attractions/AttractionIndexPage";
+import AttractionDetailsPage from "main/pages/Attractions/AttractionDetailsPage";
 
 
 function App() {
