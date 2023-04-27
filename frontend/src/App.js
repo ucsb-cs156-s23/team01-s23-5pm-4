@@ -46,7 +46,7 @@ function App() {
 
 
         {/* <Route exact path="/transports/create" element={<TransportCreatePage />} /> */}
-        {/* <Route exact path="/transports/edit/:id" element={<TransportEditPage />} /> */}
+        <Route exact path="/transports/edit/:id" element={<TransportEditPage />} />
         {/* <Route exact path="/transports/details/:id" element={<TransportDetailsPage />} /> */}
         <Route exact path="/transports/" element={<TransportIndexPage />} />
 
