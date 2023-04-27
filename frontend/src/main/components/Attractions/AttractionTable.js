@@ -42,6 +42,10 @@ export default function AttractionTable({
         {
             Header: 'Description',
             accessor: 'description',
+        },
+        {
+            Header: 'Address',
+            accessor: 'address',
         }
     ];
 
