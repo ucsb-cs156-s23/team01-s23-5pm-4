@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import AttractionIndexPage from "main/pages/Attractions/AttractionIndexPage";
+import TransportIndexPage from "main/pages/Transports/TransportIndexPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import mockConsole from "jest-mock-console";
@@ -11,25 +11,22 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const mockDelete = jest.fn();
-jest.mock('main/utils/attractionUtils', () => {
+jest.mock('main/utils/transportUtils', () => {
     return {
         __esModule: true,
-        attractionUtils: {
+        transportUtils: {
             del: (id) => {
                 return mockDelete(id);
             },
             get: () => {
                 return {
                     nextId: 5,
-                    attractions: [
+                    transports: [
                         {
                             "id": 3,
-                            "name": "Freebirds",
-                            "address": "879 Embarcadero del Norte",
-                            "city": "Isla Vista",
-                            "state": "CA",
-                            "zip": "93117",
-                            "description": "Burrito joint, and iconic Isla Vista location"
+                            "name": "Mr. Scooty",
+                            "mode": "Kart",
+                            "cost": "1000"
                         },
                     ]
                 }
@@ -39,14 +36,14 @@ jest.mock('main/utils/attractionUtils', () => {
 });
 
 
-describe("AttractionIndexPage tests", () => {
+describe("TransportIndexPage tests", () => {
 
     const queryClient = new QueryClient();
     test("renders without crashing", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <AttractionIndexPage />
+                    <TransportIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -56,24 +53,24 @@ describe("AttractionIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <AttractionIndexPage />
+                    <TransportIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        const createAttractionButton = screen.getByText("Create Attraction");
-        expect(createAttractionButton).toBeInTheDocument();
-        expect(createAttractionButton).toHaveAttribute("style", "float: right;");
+        const createTransportButton = screen.getByText("Create Transport");
+        expect(createTransportButton).toBeInTheDocument();
+        expect(createTransportButton).toHaveAttribute("style", "float: right;");
 
-        const name = screen.getByText("Freebirds");
+        const name = screen.getByText("Mr. Scooty");
         expect(name).toBeInTheDocument();
 
-        const description = screen.getByText("Burrito joint, and iconic Isla Vista location");
-        expect(description).toBeInTheDocument();
+        const mode = screen.getByText("Kart");
+        expect(mode).toBeInTheDocument();
 
-        expect(screen.getByTestId("AttractionTable-cell-row-0-col-Delete-button")).toBeInTheDocument();
-        expect(screen.getByTestId("AttractionTable-cell-row-0-col-Details-button")).toBeInTheDocument();
-        expect(screen.getByTestId("AttractionTable-cell-row-0-col-Edit-button")).toBeInTheDocument();
+        expect(screen.getByTestId("TransportTable-cell-row-0-col-Delete-button")).toBeInTheDocument();
+        expect(screen.getByTestId("TransportTable-cell-row-0-col-Details-button")).toBeInTheDocument();
+        expect(screen.getByTestId("TransportTable-cell-row-0-col-Edit-button")).toBeInTheDocument();
     });
 
     test("delete button calls delete and reloads page", async () => {
@@ -83,18 +80,18 @@ describe("AttractionIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <AttractionIndexPage />
+                    <TransportIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        const name = screen.getByText("Freebirds");
+        const name = screen.getByText("Mr. Scooty");
         expect(name).toBeInTheDocument();
 
-        const description = screen.getByText("Burrito joint, and iconic Isla Vista location");
-        expect(description).toBeInTheDocument();
+        const mode = screen.getByText("Kart");
+        expect(mode).toBeInTheDocument();
 
-        const deleteButton = screen.getByTestId("AttractionTable-cell-row-0-col-Delete-button");
+        const deleteButton = screen.getByTestId("TransportTable-cell-row-0-col-Delete-button");
         expect(deleteButton).toBeInTheDocument();
 
         deleteButton.click();
@@ -102,13 +99,13 @@ describe("AttractionIndexPage tests", () => {
         expect(mockDelete).toHaveBeenCalledTimes(1);
         expect(mockDelete).toHaveBeenCalledWith(3);
 
-        await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("/attractions"));
+        await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("/transports"));
 
 
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage = `AttractionIndexPage deleteCallback: {"id":3,"name":"Freebirds","description":"Burrito joint, and iconic Isla Vista location","address":"879 Embarcadero del Norte"}`;
+        const expectedMessage = `TransportIndexPage deleteCallback: {"id":3,"name":"Mr. Scooty","mode":"Kart","cost":"1000"}`;
         expect(message).toMatch(expectedMessage);
         restoreConsole();
 
