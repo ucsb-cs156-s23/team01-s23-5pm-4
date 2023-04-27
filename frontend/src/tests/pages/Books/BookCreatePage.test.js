@@ -77,13 +77,7 @@ describe("BookCreatePage tests", () => {
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage =  `createdBook: {"book":{
-            "id": 3,
-             "name": "Parameterized Algorithms",
-             "author": "Daniel Lokshtanov",
-             "genre": "Fantasy",
-             "word count": "too many",     
-        }`
+        const expectedMessage =  `createdBook: {"book":{"id":3,"name":"Parameterized Algorithms","author":"Daniel Lokshtanov","genre":"Fantasy","word count":"too many"}`
 
         expect(message).toMatch(expectedMessage);
         restoreConsole();
