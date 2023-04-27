@@ -108,7 +108,7 @@ describe("AttractionIndexPage tests", () => {
         // assert - check that the console.log was called with the expected message
         expect(console.log).toHaveBeenCalled();
         const message = console.log.mock.calls[0][0];
-        const expectedMessage = `AttractionIndexPage deleteCallback: {"id":3,"name":"Freebirds","description":"Burrito joint, and iconic Isla Vista location"}`;
+        const expectedMessage = `AttractionIndexPage deleteCallback: {"id":3,"name":"Freebirds","description":"Burrito joint, and iconic Isla Vista location","address":"879 Embarcadero del Norte"}`;
         expect(message).toMatch(expectedMessage);
         restoreConsole();
 
