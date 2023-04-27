@@ -29,7 +29,6 @@ function App() {
         <Route exact path="/restaurants/edit/:id" element={<RestaurantEditPage />} />
         <Route exact path="/restaurants/details/:id" element={<RestaurantDetailsPage />} />
         <Route exact path="/restaurants/" element={<RestaurantIndexPage />} />
-
       </Routes>
     </BrowserRouter>
   );
