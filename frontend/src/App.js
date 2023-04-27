@@ -14,7 +14,7 @@ import RestaurantDetailsPage from "main/pages/Restaurants/RestaurantDetailsPage"
 // import TransportCreatePage from "main/pages/Transports/TransportCreatePage";
 import TransportEditPage from "main/pages/Transports/TransportEditPage";
 import TransportIndexPage from "main/pages/Transports/TransportIndexPage";
-// import TransportDetailsPage from "main/pages/Transports/TransportDetailsPage";
+import TransportDetailsPage from "main/pages/Transports/TransportDetailsPage";
 
 
 
@@ -47,7 +47,7 @@ function App() {
 
         {/* <Route exact path="/transports/create" element={<TransportCreatePage />} /> */}
         <Route exact path="/transports/edit/:id" element={<TransportEditPage />} />
-        {/* <Route exact path="/transports/details/:id" element={<TransportDetailsPage />} /> */}
+        <Route exact path="/transports/details/:id" element={<TransportDetailsPage />} />
         <Route exact path="/transports/" element={<TransportIndexPage />} />
 
         <Route exact path="/attractions/create" element={<AttractionCreatePage />} />
