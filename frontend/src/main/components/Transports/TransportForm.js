@@ -74,7 +74,7 @@ function TransportForm({ initialContents, submitAction, buttonLabel = "Create" }
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="mode">Cost</Form.Label>
+                <Form.Label htmlFor="cost">Cost</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-cost"}
                     id="cost"
